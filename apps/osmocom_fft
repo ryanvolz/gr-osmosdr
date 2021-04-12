@@ -29,6 +29,7 @@ from gnuradio.eng_option import eng_option
 from optparse import OptionParser
 from functools import partial
 
+import os
 import sys
 import signal
 import time
@@ -305,7 +306,7 @@ class app_top_block(gr.top_block, Qt.QMainWindow):
         except RuntimeError:
             self.freq = None
 
-        self.file_sink = blocks.file_sink(gr.sizeof_gr_complex, "/dev/null", False)
+        self.file_sink = blocks.file_sink(gr.sizeof_gr_complex, os.devnull, False)
         self.file_sink.set_unbuffered(False)
         self.file_sink.close() # close the sink immediately
         # lock/connect/unlock at record button event did not work, so we leave it connected at all times
